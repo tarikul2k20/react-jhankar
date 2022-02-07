@@ -176,3 +176,262 @@ function Test(props){
 export default App;
 
 
+// ========= desturing========
+import logo from './logo.svg';
+import './App.css';
+function App() {
+  const products=[
+    {name:"adobe", price:"$33.3"},
+    {name:"office", price:"$33.3"}
+  ]
+  return (
+    <div className="App">
+      <header className="App-header">
+        <Test product={products[0]} ></Test>
+        <Test product={products[1]} ></Test>
+
+        
+      </header>
+    </div>
+  );
+}
+
+function Test(props){
+  const sty={
+    color:"white",
+    border:"1px solid black",
+    borderRadius:"5px",
+    padding:"15px",
+    backgroundColor:"cyan",
+    width:"200px",
+    height:"200px",
+    marginTop:"10px"
+  }
+  const {name, price}=props.product;
+  return (
+    <div style={sty}>
+       <h3>{name}</h3>
+       <h2>{price}</h2>
+       <button>Buy Now</button>
+      
+    </div>
+  );
+
+}
+
+export default App;
+
+
+//======using map ======
+import logo from './logo.svg';
+import './App.css';
+function App() {
+ const nayoks=["razzak", "shakib"];
+  return (
+    <div className="App">
+      <header className="App-header">
+        <p>I am a reacts</p>
+        <ul>
+          {
+            nayoks.map(nayok=><li>{nayok}</li>)
+          }
+        </ul>
+        
+      </header>
+    </div>
+  );
+}
+export default App;
+
+
+// =======another map=========
+import logo from './logo.svg';
+import './App.css';
+function App() {
+ 
+ const products=[
+   {name:"photoshop", price:"33tk"},
+   {name:"adobe", price:"33tk"}
+ ];
+  return (
+    <div className="App">
+      <header className="App-header">
+        <p>I am a reacts</p>
+        <ul>
+          {
+            products.map(product=><li>{product.name} Price:{product.price}</li>)
+          }
+        </ul>
+        
+      </header>
+    </div>
+  );
+}
+export default App;
+
+
+// ========alternate of ==========
+import logo from './logo.svg';
+import './App.css';
+function App() {
+  const products=[
+    {name:"adobe", price:"$33.3"},
+    {name:"office", price:"$33.3"}
+  ]
+  return (
+    <div className="App">
+      <header className="App-header">
+        {/* <Test product={products[0]} ></Test>
+        <Test product={products[1]} ></Test> */}
+        {
+          products.map(pd=> <Test product={pd}></Test>)
+        }
+
+        
+      </header>
+    </div>
+  );
+}
+
+function Test(props){
+  const sty={
+    color:"white",
+    border:"1px solid black",
+    borderRadius:"5px",
+    padding:"15px",
+    backgroundColor:"cyan",
+    width:"200px",
+    height:"200px",
+    marginTop:"10px"
+  }
+  const {name, price}=props.product;
+  return (
+    <div style={sty}>
+       <h3>{name}</h3>
+       <h2>{price}</h2>
+       <button>Buy Now</button>
+      
+    </div>
+  );
+
+}
+
+export default App;
+
+
+// ============== State==========
+// kono kichu change hoiteo pare nao pare 
+// ======= useState========
+import logo from './logo.svg';
+import './App.css';
+import { useState } from 'react';
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <Counter></Counter>
+        
+      </header>
+    </div>
+  );
+}
+
+function Counter(){
+  // const increaseHandler=()=>setCount(count + 1);
+  const[count, setCount]=useState(0);
+  const increaseHandler=()=> {
+    const newCount=count+1;
+    setCount(newCount)
+  };
+  return (
+    <div>
+      <h2>Count: {count}</h2>
+      <button onClick={increaseHandler}>Press</button>
+    </div>
+  );
+
+}
+export default App;
+
+//====alternative====
+import logo from './logo.svg';
+import './App.css';
+import { useState } from 'react';
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <Counter></Counter>
+        
+      </header>
+    </div>
+  );
+}
+
+function Counter(){
+  const[count, setCount]=useState(0);
+  // const increaseHandler=()=>setCount(count + 1);
+  // const increaseHandler=()=> {
+  //   const newCount=count+1;
+  //   setCount(newCount)
+  // };
+  return (
+    <div>
+      <h2>Count: {count}</h2>
+      <button onClick={()=>setCount(count + 1)}>Press</button>
+    </div>
+  );
+
+}
+export default App;
+
+// both increse and decdrease
+return (
+  <div>
+    <h2>Count: {count}</h2>
+    <button onClick={()=>setCount(count + 1)}>Increase</button>
+    <button onClick={()=>setCount(count - 1)}>Decrease</button>
+  </div>
+);
+
+}
+export default App;
+
+
+//useEffect
+//Data Load
+import logo from './logo.svg';
+import './App.css';
+import { useEffect, useState } from 'react';
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+      <Users></Users>
+        
+      </header>
+    </div>
+  );
+}
+
+function Users(){
+  const[users, setUsers]=useState([]);  //user initial value empty then setUsers is data
+  useEffect(()=>{                  // kono kisu browser a effect porle useEffect 
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then(res=>res.json())
+    .then(data=>setUsers(data));
+  },[])     //bracket dile console a ekbar e load hobe // na dile barbar load nibe
+  return (
+    <div>
+      <ul>
+      {
+        users.map(user=><li>{user.name}</li>)
+      }
+      </ul>
+    </div>
+  );
+
+}
+export default App;
+
+

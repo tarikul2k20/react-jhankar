@@ -1,42 +1,33 @@
 import logo from './logo.svg';
 import './App.css';
+import { useEffect, useState } from 'react';
 function App() {
-  const arr=[
-    {name:"adobe", price:"$33.3"},
-    {name:"office", price:"$33.3"}
-  ]
   return (
     <div className="App">
       <header className="App-header">
-        <Test name="Photoshop" price="$99.9"></Test>
-        <Test name={arr[0].name} price={arr[0].price}></Test>
-        <Test name={arr[1].name} price={arr[1].price}></Test>
+      <Users></Users>
         
       </header>
     </div>
   );
 }
 
-function Test(props){
-  const sty={
-    color:"white",
-    border:"1px solid black",
-    borderRadius:"5px",
-    padding:"15px",
-    backgroundColor:"cyan",
-    width:"200px",
-    height:"200px",
-    marginTop:"10px"
-  }
+function Users(){
+  const[users, setUsers]=useState([]);  //user initial value empty then setUsers is data
+  useEffect(()=>{                  // kono kisu browser a effect porle useEffect 
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then(res=>res.json())
+    .then(data=>setUsers(data));
+  },[])     //bracket dile console a ekbar e load hobe // na dile barbar load nibe
   return (
-    <div style={sty}>
-       <h3>{props.name}</h3>
-       <h2>{props.price}</h2>
-       <button>Buy Now</button>
-      
+    <div>
+      <ul>
+      {
+        users.map(user=><li>{user.name}</li>)
+      }
+      </ul>
     </div>
   );
 
 }
-
 export default App;
