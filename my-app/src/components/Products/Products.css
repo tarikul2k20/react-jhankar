@@ -1,0 +1,16 @@
+.product{
+    display: flex;
+    border-radius: 10px;
+    border: 1px solid gray;
+    margin-top: 5px;
+}
+.product-img{
+
+}
+.product-details{
+    padding: 10px 10px;
+    line-height: 5px;
+}
+.product-name{
+    line-height: normal;
+}

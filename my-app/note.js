@@ -435,3 +435,148 @@ function Users(){
 export default App;
 
 
+//passing argument of another
+import logo from './logo.svg';
+import './App.css';
+import { useEffect, useState } from 'react';
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+      <Users></Users>
+      
+        
+      </header>
+    </div>
+  );
+}
+
+function Users(){
+  let [count, setCount]=useState(0)
+  const handleClick=()=>{
+    setCount(count+1)
+  }
+  return (
+    <div>
+      <h1>I saw movie: {count}</h1>
+      <button onClick={handleClick}>Add</button>
+      <Counter act={count}></Counter>
+    </div>
+  );
+}
+function Counter(props){
+  
+  return(
+    <div>
+      <h2>I acted on: {props.act}</h2>
+    </div>
+  )
+}
+export default App;
+
+
+//
+import logo from './logo.svg';
+import './App.css';
+import { useEffect, useState } from 'react';
+function App() {
+  const nayoks=['shakib', 'salman'];
+  return (
+    <div className="App">
+      <header className="App-header">
+        
+        {
+          nayoks.map(nk=><Users name={nk}></Users>)
+        }
+        
+      </header>
+    </div>
+  );
+}
+
+
+function Users(props){
+  
+  return(
+    <div>
+      <h2>My name is:    {props.name} </h2>
+    </div>
+  )
+}
+export default App;
+
+//import logo from './logo.svg';
+import './App.css';
+import { useEffect, useState } from 'react';
+function App() {
+  const nayoks=[
+    {name:"shakib",age:22},
+    {name:"salman",age:23}
+  ];
+  return (
+    <div className="App">
+      <header className="App-header">
+        
+        {
+          nayoks.map(obj=><Users name={obj.name} age={obj.age}></Users>)
+        }
+        
+      </header>
+    </div>
+  );
+}
+
+
+function Users(props){
+  
+  return(
+    <div>
+      <h2>My name is:    {props.name} </h2>
+      <h3>My age is : {props.age}</h3>
+    </div>
+  )
+}
+export default App;
+
+//json placeholder theke data load
+import './App.css';
+import { useEffect, useState } from 'react';
+function App() {
+  let [user,setUser]=useState([])
+ useEffect(()=>{
+   fetch('https://jsonplaceholder.typicode.com/users')
+   .then(res=>res.json())
+   .then(data=>setUser(data))
+ },[])
+  return (
+    <div className="App">
+      <header className="App-header">
+        
+        {
+          user.map(obj=><Users name={obj.name} key={obj.id} email={obj.email}></Users>)
+        }
+        
+      </header>
+    </div>
+  );
+}
+
+
+function Users(props){
+  
+  return(
+    <div>
+      <h6>Id: {props.key}</h6>
+      <h2>My name is  {props.name} </h2>
+      <h3>Email: {props.email}</h3>
+     
+    </div>
+  )
+}
+export default App;
+
+
+
+
+
+
